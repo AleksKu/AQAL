@@ -140,10 +140,10 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Kazna\Providers\AppServiceProvider::class,
+        Kazna\Providers\AuthServiceProvider::class,
+        Kazna\Providers\EventServiceProvider::class,
+        Kazna\Providers\RouteServiceProvider::class,
 
         /**
          * Debug

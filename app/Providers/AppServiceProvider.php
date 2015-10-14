@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Kazna\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

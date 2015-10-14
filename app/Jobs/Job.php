@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace Kazna\Jobs;
 
 use Illuminate\Bus\Queueable;
 
