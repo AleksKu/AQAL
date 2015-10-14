@@ -14,7 +14,19 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call(UserTableSeeder::class);
+
+        $this->call('ProductCategoriesTableSeeder');
+        $this->command->info('Таблица категорий товаров загружена данными!');
+
+        $this->call('ProductsTableSeeder');
+        $this->command->info('Таблица товаров загружена данными!');
+
+        $this->call('OrganizationsTableSeeder');
+        $this->command->info('Таблица организаций загружена данными!');
+
+
+        $this->call('WarehousesTableSeeder');
+        $this->command->info('Таблица складов загружена данными!');
 
         Model::reguard();
     }
