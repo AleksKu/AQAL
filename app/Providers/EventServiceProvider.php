@@ -1,6 +1,6 @@
 <?php
 
-namespace Kazna\Providers;
+namespace AQAL\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Kazna\Events\SomeEvent' => [
-            'Kazna\Listeners\EventListener',
+        'AQAL\Events\SomeEvent' => [
+            'AQAL\Listeners\EventListener',
         ],
     ];
 

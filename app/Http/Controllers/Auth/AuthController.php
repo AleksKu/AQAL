@@ -1,10 +1,10 @@
 <?php
 
-namespace Kazna\Http\Controllers\Auth;
+namespace AQAL\Http\Controllers\Auth;
 
-use Kazna\User;
+use AQAL\User;
 use Validator;
-use Kazna\Http\Controllers\Controller;
+use AQAL\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 

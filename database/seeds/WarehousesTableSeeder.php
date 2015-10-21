@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use Kazna\Warehouse;
+use AQAL\Stocks\Warehouse;
 
 class WarehousesTableSeeder extends Seeder
 {
@@ -15,8 +15,8 @@ class WarehousesTableSeeder extends Seeder
     {
         DB::table('warehouses')->delete();
 
-        Warehouse::create(['title' => 'Основной склад','code'=>'aristos_main_house','organisation_id'=>1]);
-        Warehouse::create(['title' => 'Склад Oursson', 'code'=>'oursson_house','organisation_id'=>1]);
+        Warehouse::create(['title' => 'Основной склад','code'=>'aristos_main_house','organization_id'=>1]);
+        Warehouse::create(['title' => 'Склад Oursson', 'code'=>'oursson_house','organization_id'=>1]);
 
 
 

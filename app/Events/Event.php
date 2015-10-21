@@ -1,6 +1,6 @@
 <?php
 
-namespace Kazna\Events;
+namespace AQAL\Events;
 
 abstract class Event
 {

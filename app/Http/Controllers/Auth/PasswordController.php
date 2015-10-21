@@ -1,8 +1,8 @@
 <?php
 
-namespace Kazna\Http\Controllers\Auth;
+namespace AQAL\Http\Controllers\Auth;
 
-use Kazna\Http\Controllers\Controller;
+use AQAL\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller

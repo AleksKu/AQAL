@@ -13,7 +13,7 @@ class CreateGoodsTables extends Migration
     public function up()
     {
 
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('product_categories', function (Blueprint $table) {
 
             $table->increments('id');
             $table->string('title');
@@ -30,7 +30,7 @@ class CreateGoodsTables extends Migration
             $table->index('sku');
 
             $table->integer('category_id')->unsigned()->nullable();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('product_categories');
 
             $table->string('title');
             $table->longText('description')->nullable();
@@ -65,7 +65,7 @@ class CreateGoodsTables extends Migration
     {
         Schema::drop('products');
 
-        Schema::drop('categories');
+        Schema::drop('product_categories');
 
     }
 }

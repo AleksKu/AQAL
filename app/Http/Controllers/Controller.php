@@ -1,6 +1,6 @@
 <?php
 
-namespace Kazna\Http\Controllers;
+namespace AQAL\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

@@ -19,10 +19,10 @@ class CreateWarehousesTable extends Migration
             $table->string('code');
             $table->unique('code');
 
-            $table->boolean('is_default_for_organisation')->default(false);
+            $table->boolean('is_default_for_organization');
 
-            $table->integer('organisation_id')->unsigned();
-            $table->foreign('organisation_id')->references('id')->on('organizations');
+            $table->integer('organization_id')->unsigned();
+            $table->foreign('organization_id')->references('id')->on('organizations');
 
             $table->timestamps();
             $table->softDeletes();

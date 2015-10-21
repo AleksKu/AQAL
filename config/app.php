@@ -140,16 +140,22 @@ return [
         /*
          * Application Service Providers...
          */
-        Kazna\Providers\AppServiceProvider::class,
-        Kazna\Providers\AuthServiceProvider::class,
-        Kazna\Providers\EventServiceProvider::class,
-        Kazna\Providers\RouteServiceProvider::class,
+        AQAL\Providers\AppServiceProvider::class,
+        AQAL\Providers\AuthServiceProvider::class,
+        AQAL\Providers\EventServiceProvider::class,
+        AQAL\Providers\RouteServiceProvider::class,
 
         /**
          * Debug
          */
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
+        /**
+         * AQAL
+         */
+
+        \AQAL\Providers\RepositoryServiceProvider::class
 
         /**
          *

@@ -1,10 +1,10 @@
 <?php
 
-namespace Kazna;
+namespace AQAL;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Warehouse extends Model
+class DocumentStatus extends Model
 {
     //
 }

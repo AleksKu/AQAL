@@ -1,12 +1,12 @@
 <?php
 
-namespace Kazna;
+namespace AQAL\Stocks;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Kazna\Product;
 
-class Category extends Model
+
+class ProductCategory extends Model
 {
     public function products () {
         return $this->hasMany(Product::class);

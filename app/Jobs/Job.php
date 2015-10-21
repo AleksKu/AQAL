@@ -1,6 +1,6 @@
 <?php
 
-namespace Kazna\Jobs;
+namespace AQAL\Jobs;
 
 use Illuminate\Bus\Queueable;
 

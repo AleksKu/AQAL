@@ -27,8 +27,8 @@ class CreateStockExpenseTable extends Migration
             $table->integer('warehouse_id')->unsigned();
             $table->foreign('warehouse_id')->references('id')->on('warehouses');
 
-            $table->integer('organisation_id')->unsigned();
-            $table->foreign('organisation_id')->references('id')->on('organizations');
+            $table->integer('organization_id')->unsigned();
+            $table->foreign('organization_id')->references('id')->on('organizations');
 
             $table->decimal('weight', 10, 2)->nullable()->unsigned();
             $table->decimal('volume', 10, 2)->nullable()->unsigned();
@@ -36,7 +36,7 @@ class CreateStockExpenseTable extends Migration
             $table->decimal('total', 20, 2);  //общая стоимость прихода
         });
 
-        Schema::create('stock_expense_products', function (Blueprint $table) {
+        Schema::create('stock_expense_items', function (Blueprint $table) {
 
             $table->increments('id');
 
@@ -73,7 +73,7 @@ class CreateStockExpenseTable extends Migration
      */
     public function down()
     {
-        Schema::drop('stock_expense_products');
+        Schema::drop('stock_expense_items');
         Schema::drop('stock_expenses');
     }
 }

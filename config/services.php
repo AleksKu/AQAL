@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model'  => Kazna\User::class,
+        'model'  => AQAL\User::class,
         'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

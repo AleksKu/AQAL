@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-use Kazna\Product;
+use AQAL\Stocks\Product;
+use AQAL\Stocks\Stock;
 
 class ProductsTableSeeder extends Seeder
 {
@@ -32,6 +33,14 @@ class ProductsTableSeeder extends Seeder
         $product->category()->associate(1);
 
         $product->save();
+
+
+        $stock = new Stock(
+            [
+
+            ]
+
+        );
 
 
 

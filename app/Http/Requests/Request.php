@@ -1,6 +1,6 @@
 <?php
 
-namespace Kazna\Http\Requests;
+namespace AQAL\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

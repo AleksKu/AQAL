@@ -1,6 +1,6 @@
 <?php
 
-namespace Kazna\Console\Commands;
+namespace AQAL\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;

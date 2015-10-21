@@ -1,6 +1,6 @@
 <?php
 
-namespace Kazna;
+namespace AQAL;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

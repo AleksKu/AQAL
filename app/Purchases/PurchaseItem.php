@@ -1,10 +1,10 @@
 <?php
 
-namespace Kazna;
+namespace AQAL\Purchases;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Organization extends Model
+class PurchaseItem extends Model
 {
     //
 }

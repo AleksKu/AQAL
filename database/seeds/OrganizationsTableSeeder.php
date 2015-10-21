@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use Kazna\Organization;
+use AQAL\Organizations\Organization;
 
 class OrganizationsTableSeeder extends Seeder
 {

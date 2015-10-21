@@ -1,6 +1,6 @@
 <?php
 
-namespace Kazna\Exceptions;
+namespace AQAL\Exceptions;
 
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

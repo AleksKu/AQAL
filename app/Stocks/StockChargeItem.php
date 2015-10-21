@@ -1,10 +1,10 @@
 <?php
 
-namespace Kazna;
+namespace AQAL\Stocks;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Stock extends Model
+class StockChargeItem extends Model
 {
     //
 }

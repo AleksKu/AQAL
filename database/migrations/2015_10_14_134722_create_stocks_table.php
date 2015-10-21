@@ -30,8 +30,8 @@ class CreateStocksTable extends Migration
             $table->integer('warehouse_id')->unsigned();
             $table->foreign('warehouse_id')->references('id')->on('warehouses');
 
-            $table->integer('organisation_id')->unsigned();
-            $table->foreign('organisation_id')->references('id')->on('organizations');
+            $table->integer('organization_id')->unsigned();
+            $table->foreign('organization_id')->references('id')->on('organizations');
 
             $table->decimal('qty', 20, 4)->default(0);
             $table->decimal('reserved', 20, 4)->default(0);
@@ -39,6 +39,8 @@ class CreateStocksTable extends Migration
             $table->decimal('min_qty', 20, 4)->default(0);
             $table->decimal('ideal_qty', 20, 4)->default(0);
           //  $table->decimal('backordered', 20, 4)->default(0);
+
+            $table->decimal('total', 20, 2)->default(0);
 
             $table->decimal('weight', 10, 2)->nullable()->unsigned();
             $table->decimal('volume', 10, 2)->nullable()->unsigned();

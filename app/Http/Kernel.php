@@ -1,6 +1,6 @@
 <?php
 
-namespace Kazna\Http;
+namespace AQAL\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -13,11 +13,11 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \Kazna\Http\Middleware\EncryptCookies::class,
+        \AQAL\Http\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \Kazna\Http\Middleware\VerifyCsrfToken::class,
+        \AQAL\Http\Middleware\VerifyCsrfToken::class,
     ];
 
     /**
@@ -26,8 +26,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Kazna\Http\Middleware\Authenticate::class,
+        'auth' => \AQAL\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \Kazna\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \AQAL\Http\Middleware\RedirectIfAuthenticated::class,
     ];
 }

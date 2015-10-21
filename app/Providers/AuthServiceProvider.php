@@ -1,6 +1,6 @@
 <?php
 
-namespace Kazna\Providers;
+namespace AQAL\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Kazna\Model' => 'Kazna\Policies\ModelPolicy',
+        'AQAL\Model' => 'AQAL\Policies\ModelPolicy',
     ];
 
     /**

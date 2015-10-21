@@ -1,6 +1,6 @@
 <?php
 
-namespace Kazna\Console;
+namespace AQAL\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \Kazna\Console\Commands\Inspire::class,
+        \AQAL\Console\Commands\Inspire::class,
     ];
 
     /**

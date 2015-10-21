@@ -27,8 +27,8 @@ class CreateStockChargesTable extends Migration
             $table->integer('warehouse_id')->unsigned();
             $table->foreign('warehouse_id')->references('id')->on('warehouses');
 
-            $table->integer('organisation_id')->unsigned();
-            $table->foreign('organisation_id')->references('id')->on('organizations');
+            $table->integer('organization_id')->unsigned();
+            $table->foreign('organization_id')->references('id')->on('organizations');
 
             $table->decimal('weight', 10, 2)->nullable()->unsigned();
             $table->decimal('volume', 10, 2)->nullable()->unsigned();
@@ -38,7 +38,7 @@ class CreateStockChargesTable extends Migration
 
 
 
-        Schema::create('stock_charge_products', function (Blueprint $table) {
+        Schema::create('stock_charge_items', function (Blueprint $table) {
 
 
             $table->increments('id');
@@ -76,7 +76,7 @@ class CreateStockChargesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('stock_charge_products');
+        Schema::drop('stock_charge_items');
         Schema::drop('stock_charges');
     }
 }

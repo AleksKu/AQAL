@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use Kazna\Category;
+use AQAL\Stocks\ProductCategory;
 
 class ProductCategoriesTableSeeder extends Seeder
 {
@@ -15,11 +15,11 @@ class ProductCategoriesTableSeeder extends Seeder
     {
 
 
-        DB::table('categories')->delete();
+        DB::table('product_categories')->delete();
 
-        Category::create(['title' => 'Телевизоры']);
-        Category::create(['title' => 'Наушники']);
-        Category::create(['title' => 'Лампы']);
-        Category::create(['title' => 'Блендеры']);
+        ProductCategory::create(['title' => 'Телевизоры']);
+        ProductCategory::create(['title' => 'Наушники']);
+        ProductCategory::create(['title' => 'Лампы']);
+        ProductCategory::create(['title' => 'Блендеры']);
     }
 }
