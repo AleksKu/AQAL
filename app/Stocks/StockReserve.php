@@ -3,6 +3,7 @@
 namespace AQAL\Stocks;
 
 use AQAL\Organizations\Organization;
+use AQAL\Stocks\Contracts\StockDocument;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -35,8 +36,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockReserve whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockReserve whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockReserve whereDeletedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|StockReserveItem[] $items
+ * @property-read Warehouse $warehouse
+ * @property-read Organization $organization
  */
-class StockReserve extends Model
+class StockReserve extends Model implements StockDocument
 {
 
     public static $codePrefix = 'Отгрузка';
@@ -44,6 +48,12 @@ class StockReserve extends Model
     public function documentable()
     {
         return $this->morphTo();
+    }
+
+
+    public function items()
+    {
+        return $this->hasMany(StockReserveItem::class);
     }
 
 
@@ -55,4 +65,20 @@ class StockReserve extends Model
         return $this->belongsTo(Organization::class);
     }
 
+    public function populateByDocument(StockDocument $document)
+    {
+
+    }
+
+    public function activate()
+    {
+        // TODO: Implement activate() method.
+    }
+
+
+
+    public function codeForLinks($prefix)
+    {
+        // TODO: Implement codeForLinks() method.
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace AQAL\Stocks;
 
+use AQAL\Stocks\Contracts\StockDocumentItem;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -27,8 +28,24 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockExpenseItem whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockExpenseItem whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockExpenseItem whereDeletedAt($value)
+ * @property integer $expense_id
+ * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockExpenseItem whereExpenseId($value)
  */
-class StockExpenseItem extends Model
+class StockExpenseItem extends Model implements StockDocumentItem
 {
     //
+    public function product()
+    {
+        // TODO: Implement product() method.
+    }
+
+    public function document()
+    {
+        // TODO: Implement document() method.
+    }
+
+    public function populateByDocumentItem(StockDocumentItem $documentItem)
+    {
+        // TODO: Implement populateByDocumentItem() method.
+    }
 }

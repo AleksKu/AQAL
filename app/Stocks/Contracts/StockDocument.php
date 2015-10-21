@@ -14,6 +14,8 @@ interface StockDocument {
 
     public  function codeForLinks($prefix);
 
+    public  function populateByDocument(StockDocument $document);
+
 
 
 }

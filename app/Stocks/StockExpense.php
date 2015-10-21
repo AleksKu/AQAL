@@ -2,6 +2,7 @@
 
 namespace AQAL\Stocks;
 
+use AQAL\Stocks\Contracts\StockDocument;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -28,7 +29,36 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockExpense whereVolume($value)
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockExpense whereTotal($value)
  */
-class StockExpense extends Model
+class StockExpense extends Model  implements StockDocument
 {
     //
+    public function activate()
+    {
+        // TODO: Implement activate() method.
+    }
+
+    public function warehouse()
+    {
+        // TODO: Implement warehouse() method.
+    }
+
+    public function organization()
+    {
+        // TODO: Implement organization() method.
+    }
+
+    public function items()
+    {
+        // TODO: Implement items() method.
+    }
+
+    public function codeForLinks($prefix)
+    {
+        // TODO: Implement codeForLinks() method.
+    }
+
+    public function populateByDocument(StockDocument $document)
+    {
+        // TODO: Implement populateByDocument() method.
+    }
 }

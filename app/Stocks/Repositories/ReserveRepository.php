@@ -49,6 +49,7 @@ class ReserveRepository extends AbstractRepository
 
 
         $reserve = new StockReserve();
+        $reserve->populateByDocument($document);
         $reserve->warehouse()->associate($document->warehouse);
         $reserve->organization()->associate($document->organization);
         $reserve->documentable()->associate($document);
@@ -63,9 +64,7 @@ class ReserveRepository extends AbstractRepository
         foreach($items as $item)
         {
             $reserveItem = new StockReserveItem();
-            $reserveItem->product()->associate($item->product);
-            $reserveItem->reserve()->associate($reserve);
-            $reserveItem->qty = $item->qty();
+            $reserveItem->populateByDocumentItem($item);
             $reserveItem->save();
 
 

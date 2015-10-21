@@ -40,6 +40,18 @@ use AQAL\Stocks\Contracts\StockDocument;
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockTransfer whereWeight($value)
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockTransfer whereVolume($value)
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockTransfer whereTotal($value)
+ * @property integer $source_warehouse_id
+ * @property integer $target_warehouse_id
+ * @property integer $source_organization_id
+ * @property integer $target_organization_id
+ * @property boolean $is_reserved
+ * @property boolean $is_activated
+ * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockTransfer whereSourceWarehouseId($value)
+ * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockTransfer whereTargetWarehouseId($value)
+ * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockTransfer whereSourceOrganizationId($value)
+ * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockTransfer whereTargetOrganizationId($value)
+ * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockTransfer whereIsReserved($value)
+ * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockTransfer whereIsActivated($value)
  */
 class StockTransfer extends Model implements StockDocument
 {
@@ -164,4 +176,10 @@ class StockTransfer extends Model implements StockDocument
 
     }
 
+    public function populateByDocument(StockDocument $document)
+    {
+
+        throw new StockException();
+        // TODO: Implement populateByDocument() method.
+    }
 }

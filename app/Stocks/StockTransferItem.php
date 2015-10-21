@@ -3,6 +3,7 @@
 namespace AQAL\Stocks;
 
 use Illuminate\Database\Eloquent\Model;
+use AQAL\Stocks\Contracts\StockDocumentItem;
 
 /**
  * AQAL\Stocks\StockTransferItem
@@ -30,11 +31,19 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockTransferItem whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockTransferItem whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockTransferItem whereDeletedAt($value)
+ * @property integer $transfer_id
+ * @property-read Stock $sourceStock
+ * @property-read Stock $targetStock
+ * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockTransferItem whereTransferId($value)
  */
-class StockTransferItem extends Model
+class StockTransferItem extends Model implements StockDocumentItem
 {
     public function transfer() {
         return $this->belongsTo(StockTransfer::class);
+    }
+
+    public function document() {
+        return $this->transfer();
     }
 
     public function product() {
@@ -48,5 +57,10 @@ class StockTransferItem extends Model
 
     public function targetStock() {
         return $this->belongsTo(Stock::class);
+    }
+
+    public function populateByDocumentItem(StockDocumentItem $documentItem)
+    {
+        // TODO: Implement populateByDocumentItem() method.
     }
 }
