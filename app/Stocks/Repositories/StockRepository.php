@@ -10,6 +10,8 @@ namespace AQAL\Stocks\Repositories;
 
 
 
+use AQAL\Stocks\StockTransfer;
+use AQAL\Stocks\StockTransferItem;
 use \Illuminate\Support\Facades\DB as DB;
 
 use AQAL\Repositories\AbstractRepository;
@@ -18,9 +20,12 @@ use AQAL\Organizations\Organization;
 
 use AQAL\Stocks\Warehouse;
 use AQAL\Stocks\Stock;
+
 use AQAL\Stocks\Product;
 
 use AQAL\Stocks\Exceptions\StockAlreadyExists;
+use AQAL\Stocks\Exceptions\StockNotFound;
+use AQAL\Stocks\Exceptions\StockException;
 
 
 class StockRepository extends AbstractRepository
@@ -40,10 +45,10 @@ class StockRepository extends AbstractRepository
      * @throws \Exception
      */
 
-    public function createForWarehouse(Warehouse $warehouse, Product $product)
+    public function createStockForWarehouse(Warehouse $warehouse, Product $product)
     {
 
-        $stock = $warehouse->stocks()->ofProduct($product)->first();
+        $stock =  $this->findStockByProductAndWarehouse($product, $warehouse);
 
         if(!empty($stock) )
         {
@@ -63,8 +68,15 @@ class StockRepository extends AbstractRepository
 
 
 
-    public function transferToWarehouse(Stock $stock, Warehouse $target) {
 
+
+    /**
+     * @param Product $product
+     * @param Warehouse $warehouse
+     * @return Stock
+     */
+    public function findStockByProductAndWarehouse(Product $product,  Warehouse $warehouse) {
+        return $stock = $warehouse->stocks()->ofProduct($product)->first();
     }
 
 

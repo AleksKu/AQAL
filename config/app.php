@@ -155,7 +155,8 @@ return [
          * AQAL
          */
 
-        \AQAL\Providers\RepositoryServiceProvider::class
+        \AQAL\Providers\RepositoryServiceProvider::class,
+        \AQAL\Stocks\Providers\StockServiceProvider::class
 
         /**
          *

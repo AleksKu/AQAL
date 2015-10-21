@@ -50,6 +50,9 @@ class CreateStockChargesTable extends Migration
             $table->integer('stock_id')->unsigned();
             $table->foreign('stock_id')->references('id')->on('stocks');
 
+            $table->integer('charge_id')->unsigned();
+            $table->foreign('charge_id')->references('id')->on('stock_charges');
+
 
 
 

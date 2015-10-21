@@ -50,7 +50,8 @@ class CreateStockReservesTable extends Migration
             $table->integer('stock_id')->unsigned();
             $table->foreign('stock_id')->references('id')->on('stocks');
 
-
+            $table->integer('reserve_id')->unsigned();
+            $table->foreign('reserve_id')->references('id')->on('stock_reserves');
 
 
 
