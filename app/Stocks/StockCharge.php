@@ -31,6 +31,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class StockCharge extends Model implements StockDocument
 {
+
+    protected $with = ['items', 'warehouse', 'organization'];
+
     //
     public function activate()
     {

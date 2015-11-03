@@ -9,8 +9,6 @@
 namespace AQAL\Stocks\Exceptions;
 
 
-
-
 class StockException extends \Exception
 {
 

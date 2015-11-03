@@ -29,8 +29,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockExpense whereVolume($value)
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockExpense whereTotal($value)
  */
-class StockExpense extends Model  implements StockDocument
+class StockExpense extends Model implements StockDocument
 {
+
+    protected $with = ['items', 'warehouse', 'organization'];
+
     //
     public function activate()
     {

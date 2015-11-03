@@ -1,6 +1,5 @@
 <?php
 /**
-
  * Коллекция вида [id=>товара, qty=>$qty]
  * где id - id товара
  * qty  - кол-во для перемещение
@@ -16,7 +15,6 @@ use Illuminate\Support\Collection;
 
 class ProductQtyCollection extends Collection
 {
-
 
 
 }

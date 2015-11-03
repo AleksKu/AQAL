@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use AQAL\Organizations\Organization;
 
-use AQAL\Stocks\Contracts\StockDocument;
+use AQAL\Stocks\StockDocument;
 
 /**
  * AQAL\Stocks\StockTransfer
@@ -53,60 +53,71 @@ use AQAL\Stocks\Contracts\StockDocument;
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockTransfer whereIsReserved($value)
  * @method static \Illuminate\Database\Query\Builder|\AQAL\Stocks\StockTransfer whereIsActivated($value)
  */
-class StockTransfer extends Model implements StockDocument
+class StockTransfer extends  StockDocument
 {
 
 
-    public static  $codePrefix = 'Трансфер';
 
 
-    protected $attributes = array(
+    public static $codePrefix = 'Трансфер';
+
+
+    protected $attributes = [
 
         'weight' => 0,
         'volume' => 0,
         'total' => 0,
         'is_reserved' => false,
-        'is_activated' => false,
-    );
+        'status' => self::STATUS_OPEN
 
-    protected $casts = array(
+    ];
 
+    protected $casts = [
 
         'is_reserved' => 'boolean',
-        'is_activated' => 'boolean',
-    );
+    ];
 
-    public  function codeForLinks($prefix) {
-        return $prefix. static::$codePrefix. $this->id;
+
+
+    public function codeForLinks($prefix)
+    {
+        return $prefix . static::$codePrefix . $this->id;
     }
 
 
-    public function items() {
+    public function items()
+    {
         return $this->hasMany(StockTransferItem::class);
     }
 
-    public function targetWarehouse() {
+    public function targetWarehouse()
+    {
         return $this->belongsTo(Warehouse::class);
     }
 
-    public function warehouse() {
+    public function warehouse()
+    {
         return $this->targetWarehouse();
     }
 
-    public function organization() {
+    public function organization()
+    {
         return $this->targetOrganization();
     }
 
 
-    public function sourceWarehouse() {
+    public function sourceWarehouse()
+    {
         return $this->belongsTo(Warehouse::class);
     }
 
-    public function targetOrganization() {
+    public function targetOrganization()
+    {
         return $this->belongsTo(Organization::class);
     }
 
-    public function sourceOrganization() {
+    public function sourceOrganization()
+    {
         return $this->belongsTo(Organization::class);
     }
 
@@ -115,7 +126,8 @@ class StockTransfer extends Model implements StockDocument
      * Пересчитывает вес, объем и стоимость трансфера
      * @return $this
      */
-    public function calcTotals() {
+    public function calcTotals()
+    {
         return $this;
     }
 
@@ -126,13 +138,13 @@ class StockTransfer extends Model implements StockDocument
      * @return $this
      * @throws StockException
      */
-    public function activate() {
+    public function activate()
+    {
 
-        if($this->is_activated)
+        if ($this->is_activated)
             throw new StockException('Документ уже проведен');
 
-        if(!$this->is_reserved)
-        {
+        if (!$this->is_reserved) {
             $rep = new ReserveRepository();
             $rep->createByDocument($this);
 
@@ -140,8 +152,7 @@ class StockTransfer extends Model implements StockDocument
 
         $items = $this->items();
 
-        foreach($items as $item)
-        {
+        foreach ($items as $item) {
 
             //@todo проверить существование стоков
             $source = $item->sourceStock();
@@ -153,7 +164,7 @@ class StockTransfer extends Model implements StockDocument
             $qty = $item->qty;
 
 
-            if(!$source->checkAvailable($qty))
+            if (!$source->checkAvailable($qty))
                 throw new StockException('Недостаточно кол-ва для трансфера');
 
             $source->decreaseQty($qty);
@@ -165,7 +176,7 @@ class StockTransfer extends Model implements StockDocument
 
         }
 
-        $this->is_activated = true;
+        $this->status = self::STATUS_ACTIVATED;
 
         $this->calcTotals();
 
@@ -182,4 +193,6 @@ class StockTransfer extends Model implements StockDocument
         throw new StockException();
         // TODO: Implement populateByDocument() method.
     }
+
+
 }

@@ -38,24 +38,35 @@ use AQAL\Stocks\Contracts\StockDocumentItem;
  */
 class StockTransferItem extends Model implements StockDocumentItem
 {
-    public function transfer() {
+
+
+    protected $touches = ['transfer'];
+
+    protected $with = ['product'];
+
+    public function transfer()
+    {
         return $this->belongsTo(StockTransfer::class);
     }
 
-    public function document() {
+    public function document()
+    {
         return $this->transfer();
     }
 
-    public function product() {
+    public function product()
+    {
         return $this->belongsTo(Product::class);
     }
 
 
-    public function sourceStock() {
+    public function sourceStock()
+    {
         return $this->belongsTo(Stock::class);
     }
 
-    public function targetStock() {
+    public function targetStock()
+    {
         return $this->belongsTo(Stock::class);
     }
 

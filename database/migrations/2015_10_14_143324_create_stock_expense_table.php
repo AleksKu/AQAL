@@ -17,7 +17,7 @@ class CreateStockExpenseTable extends Migration
         Schema::create('stock_expenses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code');
-
+            $table->string('status');
 
             $table->morphs('documentable');
 

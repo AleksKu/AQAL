@@ -33,6 +33,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class StockChargeItem extends Model implements StockDocumentItem
 {
+
+    protected $with = ['product'];
+
     //
     public function product()
     {

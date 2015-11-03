@@ -12,7 +12,7 @@ namespace AQAL\Stocks\Repositories;
 use AQAL\Repositories\AbstractRepository;
 
 use AQAL\Stocks\Stock;
-use AQAL\Stocks\Contracts\StockDocument;
+use AQAL\Stocks\StockDocument;
 use AQAL\Stocks\StockReserve;
 use AQAL\Stocks\StockReserveItem;
 use AQAL\Stocks\Warehouse;
@@ -32,7 +32,7 @@ class ReserveRepository extends AbstractRepository
 
     public function __construct(Stock $stock = null, StockRepository $stockRepository = null)
     {
-        $this->model    = $stock;
+        $this->model = $stock;
         $this->stockRepository = $stockRepository;
 
     }
@@ -45,24 +45,19 @@ class ReserveRepository extends AbstractRepository
      * @return StockReserve
      */
 
-    public function createByDocument(StockDocument $document) {
+    public function createByDocument(StockDocument $document)
+    {
 
 
         $reserve = new StockReserve();
         $reserve->populateByDocument($document);
-        $reserve->warehouse()->associate($document->warehouse);
-        $reserve->organization()->associate($document->organization);
-        $reserve->documentable()->associate($document);
-
-        $reserve->code = $document->codeForLinks(StockReserve::$codePrefix);
 
         $reserve->save();
 
 
         $items = $document->items();
 
-        foreach($items as $item)
-        {
+        foreach ($items as $item) {
             $reserveItem = new StockReserveItem();
             $reserveItem->populateByDocumentItem($item);
             $reserveItem->save();

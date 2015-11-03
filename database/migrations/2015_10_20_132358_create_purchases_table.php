@@ -18,8 +18,7 @@ class CreatePurchasesTable extends Migration
 
             $table->string('code');
 
-            $table->integer('status_id')->unsigned();
-            $table->foreign('status_id')->references('id')->on('document_statuses');
+            $table->string('status');
 
 
 

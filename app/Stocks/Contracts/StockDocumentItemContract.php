@@ -12,7 +12,8 @@ namespace AQAL\Stocks\Contracts;
 interface StockDocumentItem
 {
     public function product();
+
     public function document();
 
-    public  function populateByDocumentItem(StockDocumentItem $documentItem);
+    public function populateByDocumentItem(StockDocumentItem $documentItem);
 }

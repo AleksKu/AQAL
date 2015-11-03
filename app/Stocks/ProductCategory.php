@@ -5,7 +5,6 @@ namespace AQAL\Stocks;
 use Illuminate\Database\Eloquent\Model;
 
 
-
 /**
  * AQAL\Stocks\ProductCategory
  *
@@ -23,7 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ProductCategory extends Model
 {
-    public function products () {
+    public function products()
+    {
         return $this->hasMany(Product::class);
     }
 }

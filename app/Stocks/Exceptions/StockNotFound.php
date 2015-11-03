@@ -9,7 +9,7 @@
 namespace AQAL\Stocks\Exceptions;
 
 
-class StockNotFound  extends StockException
+class StockNotFound extends StockException
 {
     protected $message = 'Сток не найден';
 }

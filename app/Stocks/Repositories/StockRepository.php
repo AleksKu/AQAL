@@ -9,7 +9,6 @@
 namespace AQAL\Stocks\Repositories;
 
 
-
 use AQAL\Stocks\StockTransfer;
 use AQAL\Stocks\StockTransferItem;
 use \Illuminate\Support\Facades\DB as DB;
@@ -32,7 +31,7 @@ class StockRepository extends AbstractRepository
 {
     public function __construct(Stock $stock = null)
     {
-        $this->model    = $stock;
+        $this->model = $stock;
 
     }
 
@@ -48,10 +47,9 @@ class StockRepository extends AbstractRepository
     public function createStockForWarehouse(Warehouse $warehouse, Product $product)
     {
 
-        $stock =  $this->findStockByProductAndWarehouse($product, $warehouse);
+        $stock = $this->findStockByProductAndWarehouse($product, $warehouse);
 
-        if(!empty($stock) )
-        {
+        if (!empty($stock)) {
             throw new StockAlreadyExists();
         }
 
@@ -67,18 +65,15 @@ class StockRepository extends AbstractRepository
     }
 
 
-
-
-
     /**
      * @param Product $product
      * @param Warehouse $warehouse
      * @return Stock
      */
-    public function findStockByProductAndWarehouse(Product $product,  Warehouse $warehouse) {
+    public function findStockByProductAndWarehouse(Product $product, Warehouse $warehouse)
+    {
         return $stock = $warehouse->stocks()->ofProduct($product)->first();
     }
-
 
 
     /**
@@ -95,9 +90,8 @@ class StockRepository extends AbstractRepository
         $stocks = [];
         $warehouses = $organization->warehouses();
 
-        DB::transaction(function() use($warehouses, $product) {
-            foreach($warehouses as $warehouse)
-            {
+        DB::transaction(function () use ($warehouses, $product) {
+            foreach ($warehouses as $warehouse) {
 
                 $stocks[] = $this->createForWarehouse($warehouse, $product);
             }
@@ -114,24 +108,24 @@ class StockRepository extends AbstractRepository
      *
      * @todo реализовать пересчет веса и объема
      */
-/*    public function reserve(Stock $stock, $reserveQty =1, $document = null)  {
+    /*    public function reserve(Stock $stock, $reserveQty =1, $document = null)  {
 
-        $qty = $stock->qty;
-        $reservedOld = $stock->reserved;
-        $availible = $stock->availible;
+            $qty = $stock->qty;
+            $reservedOld = $stock->reserved;
+            $availible = $stock->availible;
 
-        if($reserveQty> $availible)
-            throw new Exception('Не достаточно кол-ва на складе для резерва');
+            if($reserveQty> $availible)
+                throw new Exception('Не достаточно кол-ва на складе для резерва');
 
-        $availible = $availible-$reserveQty;
-        $reserved = $reservedOld + $reserveQty;
+            $availible = $availible-$reserveQty;
+            $reserved = $reservedOld + $reserveQty;
 
-        $reserve = new StockReserve();
-        $reserve->warehouse_id = $stock->warehouse_id;
-        $reserve->organization_id = $stock->organization_id;
+            $reserve = new StockReserve();
+            $reserve->warehouse_id = $stock->warehouse_id;
+            $reserve->organization_id = $stock->organization_id;
 
 
 
-    }*/
+        }*/
 
 }

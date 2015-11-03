@@ -17,6 +17,8 @@ class CreateStockTransferTable extends Migration
             $table->increments('id');
             $table->string('code');
 
+            $table->string('status');
+            $table->boolean('is_reserved');
 
             $table->string('desc');
 
@@ -38,8 +40,8 @@ class CreateStockTransferTable extends Migration
             $table->foreign('target_organization_id')->references('id')->on('organizations');
 
 
-            $table->boolean('is_reserved');
-            $table->boolean('is_activated');
+
+
 
             $table->decimal('weight', 10, 2)->nullable()->unsigned();
             $table->decimal('volume', 10, 2)->nullable()->unsigned();

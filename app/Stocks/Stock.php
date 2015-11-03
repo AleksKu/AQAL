@@ -6,8 +6,10 @@ use AQAL\Stocks\Exceptions\StockException;
 use Illuminate\Database\Eloquent\Model;
 
 
-
 use AQAL\Organizations\Organization as Organization;
+
+
+use InvalidArgumentException;
 
 
 /**
@@ -56,8 +58,10 @@ use AQAL\Organizations\Organization as Organization;
 class Stock extends Model
 {
 
-
-
+    protected $with = ['warehouse', 'organization'];
+    /**
+     * @var array
+     */
     protected $attributes = array(
         'qty' => 0,
         'available' => 0,
@@ -68,37 +72,67 @@ class Stock extends Model
         'volume' => 0
     );
 
-    public function product() {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function product()
+    {
 
         return $this->belongsTo(Product::class);
     }
 
-    public function warehouse() {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function warehouse()
+    {
         return $this->belongsTo(Warehouse::class);
     }
 
 
-    public function organization() {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function organization()
+    {
         return $this->belongsTo(Organization::class);
     }
 
+    /**
+     * @param $query
+     * @param Product $product
+     * @return mixed
+     */
     public function scopeOfProduct($query, Product $product)
     {
-        return $query->whereProductId($product->id);
+        return $query->whereProductId($product->getId());
     }
 
 
+    /**
+     * @param $query
+     * @param Warehouse $warehouse
+     * @return mixed
+     */
     public function scopeOfWarehouse($query, Warehouse $warehouse)
     {
-        return $query->whereWarehouseId($warehouse->id);
+        return $query->whereWarehouseId($warehouse->getId());
     }
 
 
-    public function setQtyAttribute() {
+    /**
+     * @param float $qty
+     */
+    public function setQtyAttribute($qty)
+    {
 
+        $qty = static::castQty($qty);
+
+        $this->attributes['qty'] = $qty;
+        $this->calcAvailable();
+        $this->calcTotals();
+        return $this;
     }
-
-
 
 
     /**
@@ -108,19 +142,19 @@ class Stock extends Model
      */
     public function checkAvailable($qty)
     {
-        if($this->available > $qty)
+        if ($this->available > $qty)
             return true;
 
         return false;
     }
 
 
-
     /**
-     * Пересчитывает доступное кол-во, на основании обзего кол-ва на складе и резервов
+     * Пересчитывает доступное кол-во, на основании общего кол-ва на складе и резервов
      * @return $this
      */
-    public function calcAvailable() {
+    public function calcAvailable()
+    {
 
         $this->available = $this->qty - $this->reserved;
 
@@ -133,7 +167,8 @@ class Stock extends Model
      * @return $this
      */
 
-    public function calcTotals() {
+    public function calcTotals()
+    {
 
         return $this;
     }
@@ -148,9 +183,10 @@ class Stock extends Model
      */
     public function decreaseQty($qty)
     {
-        if($this->qty< $qty)
-        {
-            throw new StockException('Не достаточно товара для списания');
+
+        $qty = static::castQty($qty);
+        if ($this->qty < $qty) {
+            throw new StockException('Недостаточно товара для списания');
         }
 
         $this->qty -= $qty;
@@ -169,6 +205,9 @@ class Stock extends Model
      */
     public function increaseQty($qty)
     {
+
+        $qty = static::castQty($qty);
+
         $this->qty += $qty;
 
         $this->calcAvailable();
@@ -177,11 +216,63 @@ class Stock extends Model
     }
 
 
+    /**
+     * @todo этот метод должен вызываться только из документа резерва
+     * Резервирует заданное кол-во товара
+     * @param $qty
+     * @return $this
+     * @throws StockException
+     */
+    public function reserveQty($qty)
+    {
+        $qty = static::castQty($qty);
+
+        if ($this->available < $qty)
+            throw new StockException('Недостаточно товара для резерва');
 
 
+        $this->reserved = $this->reserved + $qty;
+
+        $this->calcAvailable();
+        $this->calcTotals();
+
+        return $this;
+
+    }
 
 
+    /**
+     * Снимаем резерв заданного кол-ва
+     * @param $qty
+     * @return $this
+     * @throws StockException
+     */
+    public function removeReserveQty($qty)
+    {
+        $qty = static::castQty($qty);
 
+        if ($this->reserved < $qty)
+            throw new StockException('Невозможно снять с резерва больше чем уже стоит в резерве');
+
+
+        $this->reserved = $this->reserved - $qty;
+
+        $this->calcAvailable();
+        $this->calcTotals();
+
+        return $this;
+    }
+
+    /**
+     * @param $qty
+     * @return float
+     */
+    public function castQty($qty)
+    {
+        if (!is_numeric($qty))
+            throw new InvalidArgumentException('кол-во товара для резерва должно быть числом');
+        return floatval($qty);
+    }
 
 
 }

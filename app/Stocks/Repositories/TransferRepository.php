@@ -19,7 +19,6 @@ use AQAL\Stocks\StockTransferItem;
 use AQAL\Stocks\ProductQtyCollection;
 
 
-
 use AQAL\Stocks\Exceptions\StockNotFound;
 use AQAL\Stocks\Exceptions\StockException;
 
@@ -31,7 +30,7 @@ class TransferRepository extends AbstractRepository
 
     public function __construct(Stock $stock = null, StockRepository $stockRepository = null)
     {
-        $this->model    = $stock;
+        $this->model = $stock;
         $this->stockRepository = $stockRepository;
 
     }
@@ -48,12 +47,11 @@ class TransferRepository extends AbstractRepository
      * @param boolean $reserve //зарезервировать товары?
      * @return StockTransfer
      */
-    public function createTransfer(ProductQtyCollection $collection, Warehouse $source,  Warehouse $target, $reserve = false) {
+    public function createTransfer(ProductQtyCollection $collection, Warehouse $source, Warehouse $target, $reserve = false)
+    {
 
 
-
-        if($source->organization()->id != $target->organization()->id)
-        {
+        if ($source->organization()->id != $target->organization()->id) {
             throw new StockException('Для перемещения между организациями, используйте метод StockRepository::createOrganisationsTransfer');
         }
 
@@ -70,9 +68,7 @@ class TransferRepository extends AbstractRepository
         $transfer->save();
 
 
-
-        foreach($collection as $row)
-        {
+        foreach ($collection as $row) {
             $productId = $row['id'];
             $qty = $row['qty'];
 
@@ -80,7 +76,7 @@ class TransferRepository extends AbstractRepository
 
             $stock = $this->stockRepository->findStockByProductAndWarehouse($product, $source);
 
-            if(empty($stock))
+            if (empty($stock))
                 throw new StockNotFound();
 
 
@@ -93,11 +89,9 @@ class TransferRepository extends AbstractRepository
             $item->save();
 
 
-
         }
 
-        if($reserve === true)
-        {
+        if ($reserve === true) {
             $transfer->is_reserved = true;
             $rep = new ReserveRepository();
             $rep->createByDocument($transfer);

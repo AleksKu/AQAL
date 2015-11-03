@@ -2,9 +2,9 @@
 
 namespace AQAL\Stocks;
 
-use AQAL\Organizations\Organization;
-use AQAL\Stocks\Contracts\StockDocument;
-use Illuminate\Database\Eloquent\Model;
+
+
+
 
 /**
  * AQAL\Stocks\StockReserve
@@ -40,15 +40,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read Warehouse $warehouse
  * @property-read Organization $organization
  */
-class StockReserve extends Model implements StockDocument
+class StockReserve extends  StockDocument
 {
 
-    public static $codePrefix = 'Отгрузка';
 
-    public function documentable()
-    {
-        return $this->morphTo();
-    }
+    protected $table = 'stock_reserves';
+
+    public static $codePrefix = 'Резерв';
+
 
 
     public function items()
@@ -57,28 +56,29 @@ class StockReserve extends Model implements StockDocument
     }
 
 
-    public function warehouse() {
-        return $this->belongsTo(Warehouse::class);
-    }
 
-    public function organization() {
-        return $this->belongsTo(Organization::class);
-    }
 
+    /**
+     * Заполняет поля на основании документа
+     * @param StockDocument $document
+     */
     public function populateByDocument(StockDocument $document)
     {
+        $this->warehouse()->associate($document->warehouse);
+        $this->organization()->associate($document->organization);
+        $this->documentable()->associate($document);
+
+        $this->code = $document->codeForLinks(StockReserve::$codePrefix);
 
     }
-
-    public function activate()
-    {
-        // TODO: Implement activate() method.
-    }
-
 
 
     public function codeForLinks($prefix)
     {
         // TODO: Implement codeForLinks() method.
     }
+
+
+
+
 }
